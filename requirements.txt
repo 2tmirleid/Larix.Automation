@@ -1,0 +1,5 @@
+pywinauto
+pytest
+pytest-html
+logging
+python-dotenv
