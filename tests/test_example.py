@@ -6,15 +6,6 @@ from pywinauto import Application
 
 from pages.main_window_page import MainWindowPage
 
-
-# @pytest.fixture
-# def app():
-#     load_dotenv(find_dotenv())
-#
-#     application = Application(backend="uia").start(os.environ["EXE_PATH"])
-#     yield application
-#     # application.kill()
-
 def test_example():
     main_window = MainWindowPage()
     main_window.open_file_context_menu()
