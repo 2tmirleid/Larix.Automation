@@ -5,7 +5,6 @@ from pages.base_page import BasePage
 
 class MainWindowPage(BasePage):
     def __init__(self):
-
         super().__init__()
 
         self.main_toolbar = MainToolbarButtonsEnum
@@ -18,7 +17,7 @@ class MainWindowPage(BasePage):
         file_menu_btn_title = self.main_toolbar.FILE.value
 
         if self.window.exists():
-            file_menu_btn = self.window.child_window(
+            file_menu_btn = self.init_window_child(
                 title=file_menu_btn_title,
                 control_type="MenuItem"
             )
@@ -33,7 +32,7 @@ class MainWindowPage(BasePage):
         project_manager_title = self.file_toolbar.PROJECT_MANAGER.value
 
         if self.window.exists():
-            project_manager_btn = self.window.child_window(
+            project_manager_btn = self.init_window_child(
                 title=project_manager_title,
                 control_type="MenuItem"
             )
@@ -42,9 +41,3 @@ class MainWindowPage(BasePage):
                 project_manager_btn.click_input()
             else:
                 raise Exception(f"Element {project_manager_title} not found")
-
-
-if __name__ == "__main__":
-    temp = MainWindowPage()
-    temp.open_file_context_menu()
-    temp.open_project_manager()

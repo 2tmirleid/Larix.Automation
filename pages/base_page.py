@@ -13,7 +13,7 @@ class BasePage:
 
         load_dotenv(find_dotenv())
 
-        self.env_vars_exists()
+        self._env_vars_exists()
 
         self.exe_path = os.environ["EXE_PATH"]
         self.title    = os.environ['WINDOW_TITLE']
@@ -21,14 +21,22 @@ class BasePage:
         self.app    = Application(backend="uia").start(self.exe_path)
         self.window = self.app.window(title=self.title)
 
-    def env_vars_exists(self) -> None:
+    def _env_vars_exists(self) -> None:
         for env_var in self.env_vars:
             if not os.environ.get(str(env_var.value)):
                 raise Exception(f"Env var {env_var.value} not found")
-
 
     def wait_until_visible(self, timeout: int = None) -> None:
         if timeout is None:
             timeout = self.timeouts.IMPLICIT.value
 
         self.window.wait('visible', timeout=timeout)
+
+    def init_window_child(self, title: str, control_type: str):
+        if title.strip() and control_type.strip():
+            return self.window.child_window(
+                title=title,
+                control_type=control_type
+            )
+        else:
+            raise Exception("Title and control_type must by not empty")
