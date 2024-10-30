@@ -23,3 +23,4 @@ class BasePage:
 
     def wait_until_visible(self, timeout: int = 10) -> None:
         self.window.wait('visible', timeout=timeout)
+
